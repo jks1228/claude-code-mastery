@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>계산기</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .calc-btn {
+            transition: all 0.2s ease;
+        }
+        .calc-btn:active {
+            transform: scale(0.95);
+        }
+        .display {
+            word-wrap: break-word;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-2xl p-6 w-full max-w-sm">
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">계산기</h1>
+
+        <!-- 디스플레이 -->
+        <div class="bg-gray-900 text-white rounded-lg p-4 mb-6 text-right">
+            <div class="display text-4xl font-mono font-bold break-words">0</div>
+        </div>
+
+        <!-- 버튼 그리드 -->
+        <div class="grid grid-cols-4 gap-3">
+            <!-- 첫 번째 행: C, DEL, /, * -->
+            <button class="calc-btn col-span-2 bg-red-500 hover:bg-red-600 text-white font-bold py-4 rounded-lg text-lg" data-action="clear">
+                C
+            </button>
+            <button class="calc-btn bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 rounded-lg text-lg" data-action="delete">
+                DEL
+            </button>
+            <button class="calc-btn bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 rounded-lg text-lg" data-operator="/">
+                ÷
+            </button>
+
+            <!-- 두 번째 행: 7, 8, 9, * -->
+            <button class="calc-btn bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-4 rounded-lg text-lg" data-number="7">7</button>
+            <button class="calc-btn bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-4 rounded-lg text-lg" data-number="8">8</button>
+            <button class="calc-btn bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-4 rounded-lg text-lg" data-number="9">9</button>
+            <button class="calc-btn bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 rounded-lg text-lg" data-operator="*">
+                ×
+            </button>
+
+            <!-- 세 번째 행: 4, 5, 6, - -->
+            <button class="calc-btn bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-4 rounded-lg text-lg" data-number="4">4</button>
+            <button class="calc-btn bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-4 rounded-lg text-lg" data-number="5">5</button>
+            <button class="calc-btn bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-4 rounded-lg text-lg" data-number="6">6</button>
+            <button class="calc-btn bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 rounded-lg text-lg" data-operator="-">
+                −
+            </button>
+
+            <!-- 네 번째 행: 1, 2, 3, + -->
+            <button class="calc-btn bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-4 rounded-lg text-lg" data-number="1">1</button>
+            <button class="calc-btn bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-4 rounded-lg text-lg" data-number="2">2</button>
+            <button class="calc-btn bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-4 rounded-lg text-lg" data-number="3">3</button>
+            <button class="calc-btn bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 rounded-lg text-lg" data-operator="+">
+                +
+            </button>
+
+            <!-- 다섯 번째 행: 0, ., = -->
+            <button class="calc-btn col-span-2 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-4 rounded-lg text-lg" data-number="0">
+                0
+            </button>
+            <button class="calc-btn bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-4 rounded-lg text-lg" data-action="decimal">
+                .
+            </button>
+            <button class="calc-btn bg-green-500 hover:bg-green-600 text-white font-bold py-4 rounded-lg text-lg" data-action="equal">
+                =
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const display = document.querySelector('.display');
+        const numberBtns = document.querySelectorAll('[data-number]');
+        const operatorBtns = document.querySelectorAll('[data-operator]');
+        const actionBtns = document.querySelectorAll('[data-action]');
+
+        let currentValue = '0';
+        let previousValue = '';
+        let operator = null;
+        let shouldResetDisplay = false;
+
+        // 숫자 버튼 클릭
+        numberBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const number = btn.dataset.number;
+
+                if (shouldResetDisplay) {
+                    currentValue = number;
+                    shouldResetDisplay = false;
+                } else {
+                    currentValue = currentValue === '0' ? number : currentValue + number;
+                }
+                updateDisplay();
+            });
+        });
+
+        // 연산자 버튼 클릭
+        operatorBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const newOperator = btn.dataset.operator;
+
+                if (operator !== null && !shouldResetDisplay) {
+                    calculate();
+                }
+
+                previousValue = currentValue;
+                operator = newOperator;
+                shouldResetDisplay = true;
+            });
+        });
+
+        // 액션 버튼 클릭
+        actionBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const action = btn.dataset.action;
+
+                switch(action) {
+                    case 'clear':
+                        currentValue = '0';
+                        previousValue = '';
+                        operator = null;
+                        shouldResetDisplay = false;
+                        break;
+                    case 'delete':
+                        if (currentValue !== '0') {
+                            currentValue = currentValue.slice(0, -1) || '0';
+                        }
+                        break;
+                    case 'decimal':
+                        if (!currentValue.includes('.')) {
+                            currentValue += '.';
+                        }
+                        break;
+                    case 'equal':
+                        if (operator !== null) {
+                            calculate();
+                            operator = null;
+                        }
+                        shouldResetDisplay = true;
+                        break;
+                }
+                updateDisplay();
+            });
+        });
+
+        // 계산 함수
+        function calculate() {
+            const prev = parseFloat(previousValue);
+            const current = parseFloat(currentValue);
+            let result;
+
+            switch(operator) {
+                case '+':
+                    result = prev + current;
+                    break;
+                case '-':
+                    result = prev - current;
+                    break;
+                case '*':
+                    result = prev * current;
+                    break;
+                case '/':
+                    result = current !== 0 ? prev / current : 0;
+                    break;
+                default:
+                    return;
+            }
+
+            currentValue = result.toString();
+            previousValue = '';
+        }
+
+        // 디스플레이 업데이트
+        function updateDisplay() {
+            display.textContent = currentValue;
+        }
+    </script>
+</body>
+</html>

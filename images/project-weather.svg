@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360">
+  <rect width="640" height="360" fill="#eff6ff"/>
+  <rect width="640" height="36" fill="#ffffff"/>
+  <line x1="0" y1="36" x2="640" y2="36" stroke="#dbeafe" stroke-width="2"/>
+  <circle cx="24" cy="18" r="6" fill="#cbd5e1"/>
+  <circle cx="46" cy="18" r="6" fill="#cbd5e1"/>
+  <circle cx="68" cy="18" r="6" fill="#cbd5e1"/>
+
+  <g>
+    <circle cx="120" cy="110" r="34" fill="#fbbf24"/>
+    <g stroke="#fbbf24" stroke-width="6" stroke-linecap="round">
+      <line x1="120" y1="52" x2="120" y2="64"/>
+      <line x1="120" y1="156" x2="120" y2="168"/>
+      <line x1="62" y1="110" x2="74" y2="110"/>
+      <line x1="166" y1="110" x2="178" y2="110"/>
+      <line x1="79" y1="69" x2="87" y2="77"/>
+      <line x1="153" y1="143" x2="161" y2="151"/>
+      <line x1="161" y1="69" x2="153" y2="77"/>
+      <line x1="87" y1="143" x2="79" y2="151"/>
+    </g>
+  </g>
+
+  <g>
+    <ellipse cx="230" cy="128" rx="60" ry="34" fill="#ffffff" stroke="#93c5fd" stroke-width="4"/>
+    <circle cx="205" cy="112" r="26" fill="#ffffff" stroke="#93c5fd" stroke-width="4"/>
+    <circle cx="245" cy="104" r="30" fill="#ffffff" stroke="#93c5fd" stroke-width="4"/>
+  </g>
+
+  <text x="330" y="120" font-family="Arial, sans-serif" font-size="42" fill="#1e40af" font-weight="bold">22°C</text>
+  <text x="330" y="150" font-family="Arial, sans-serif" font-size="18" fill="#3b82f6">맑음 · 서울</text>
+
+  <g>
+    <rect x="380" y="240" width="30" height="70" rx="4" fill="#93c5fd"/>
+    <rect x="430" y="200" width="30" height="110" rx="4" fill="#60a5fa"/>
+    <rect x="480" y="230" width="30" height="80" rx="4" fill="#93c5fd"/>
+    <rect x="530" y="180" width="30" height="130" rx="4" fill="#2563eb"/>
+    <rect x="580" y="220" width="30" height="90" rx="4" fill="#93c5fd"/>
+  </g>
+</svg>

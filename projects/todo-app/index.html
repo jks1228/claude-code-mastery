@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>할 일 관리 앱</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="bg-slate-50 text-slate-800">
+  <main class="max-w-2xl mx-auto px-6 py-16">
+    <a href="../../index.html#projects" class="text-sm text-blue-600 hover:underline">← 이력서로 돌아가기</a>
+
+    <h1 class="text-2xl font-bold mt-6 mb-2">할 일 관리 앱</h1>
+    <p class="text-sm text-slate-600 mb-8">Vanilla JS로 만든 To-do 리스트 웹앱. 로컬 스토리지 기반 데이터 저장.</p>
+
+    <form id="todo-form" class="flex gap-2 mb-6">
+      <label for="todo-input" class="sr-only">할 일 입력</label>
+      <input
+        id="todo-input"
+        type="text"
+        placeholder="할 일을 입력하세요"
+        autocomplete="off"
+        class="flex-1 rounded-lg border border-slate-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      <button
+        type="submit"
+        class="rounded-lg bg-blue-600 text-white font-medium px-4 py-2 hover:bg-blue-700 transition"
+      >
+        추가
+      </button>
+    </form>
+
+    <div id="todo-filters" class="flex flex-wrap gap-2 mb-4">
+      <button type="button" data-filter="all" class="filter-btn rounded-lg px-3 py-1 text-sm font-medium transition">전체</button>
+      <button type="button" data-filter="active" class="filter-btn rounded-lg px-3 py-1 text-sm font-medium transition">진행중</button>
+      <button type="button" data-filter="completed" class="filter-btn rounded-lg px-3 py-1 text-sm font-medium transition">완료</button>
+    </div>
+
+    <ul id="todo-list" class="space-y-2 mb-4"></ul>
+
+    <div class="flex justify-between items-center text-sm text-slate-500">
+      <span id="todo-count">0개 남음</span>
+      <button
+        id="clear-completed"
+        type="button"
+        class="text-blue-600 font-medium hover:underline"
+      >
+        완료 항목 지우기
+      </button>
+    </div>
+  </main>
+
+  <script src="js/todo.js"></script>
+</body>
+</html>

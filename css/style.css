@@ -1,0 +1,8 @@
+html {
+  scroll-behavior: smooth;
+}
+
+/* 히어로 섹션 프로필 이미지 뒤의 유기적인 블롭 장식 */
+.blob-shape {
+  border-radius: 63% 37% 54% 46% / 45% 41% 59% 55%;
+}
